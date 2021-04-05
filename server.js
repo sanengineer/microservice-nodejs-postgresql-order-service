@@ -2,7 +2,6 @@ require("dotenv").config();
 const { error } = require("console");
 const fastify = require("fastify");
 const http = require("http");
-const { callbackify } = require("util");
 
 const app = fastify({
   logger: {
@@ -11,17 +10,6 @@ const app = fastify({
 });
 
 app.register(require("fastify-auth"));
-
-// const x = () => {
-//   app.route({
-//     method: "POST",
-//     url: `${userServiceHostname}/user/auth/authenticate`,
-//     handler: function (req, res) {
-//       req.log.info("test token");
-//       req.send({ token: `${bearerToken}` });
-//     },
-//   });
-// };
 
 const verify = (request, reply, done) => {
   if (!request.raw.headers.authorization) {
@@ -49,30 +37,7 @@ const verify = (request, reply, done) => {
     },
   };
 
-  //   const req = http.request(options, (res) => {
-  //     console.log(`\nstatus:\n${res.statusCode}\n`);
-  //     console.log(`\nheader:\n ${res.rawHeaders}\n`);
-  //     console.log(`\rbody:${res}`);
-
-  //     res.on("data", (d) => {
-  //       process.stdout.write(d);
-  //     });
-  //   });
-  //   req.on("error", (error) => {
-  //     console.error("test:", error);
-  //   });
-  //   req.write(data);
-  // req.end();
-
   const req = http.request(options, (res) => {
-    if (res.statusCode !== 201) {
-      console.error(
-        `Did not get a Created from the server. Code: ${res.statusCode}`
-      );
-      res.resume();
-      return;
-    }
-
     let data = "";
 
     res.on("data", (chunk) => {
@@ -84,8 +49,21 @@ const verify = (request, reply, done) => {
     // });
 
     res.on("close", () => {
-      //   console.log("Added new user");
-      console.log(JSON.parse(data));
+      console.log("statuscode", res.statusCode);
+
+      if (res.statusCode == 401) {
+        //
+        //debug
+        console.log(JSON.parse(data));
+
+        reply.statusCode = res.statusCode;
+        reply.send(JSON.parse(data));
+      } else if (res.statusCode == 200) {
+        //
+        //debug
+        console.log(JSON.parse(data));
+        done();
+      }
     });
   });
 
@@ -96,11 +74,8 @@ const verify = (request, reply, done) => {
     console.log("request error:", error);
   });
 
-  //   reply.send(x());
   request.log.info("test request middleware it's ok");
 
-  //   console.log("reply:", req);
-  //
   //debug
   //   console.log("\n");
   //   console.log("bearer token:", "\n", bearerToken, "\n");
@@ -119,20 +94,6 @@ app.get("/", (req, res) => {
 app.route({
   method: "GET",
   url: "/order",
-  //   schema: {
-  //     querystring: {
-  //       name: { type: "string" },
-  //       excitement: { type: "integer" },
-  //     },
-  //     response: {
-  //       201: {
-  //         type: "object",
-  //         properties: {
-  //           hello: { type: "string" },
-  //         },
-  //       },
-  //     },
-  //   },
   preHandler: verify,
   handler: function (req, res) {
     req.log.info("log info route order method:GET");
