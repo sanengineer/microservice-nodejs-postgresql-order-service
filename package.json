@@ -1,0 +1,40 @@
+{
+  "name": "fastify-nodejs-postgresql-order-services",
+  "version": "1.0.0",
+  "description": "build application order services as microservices with fastify (nodejs framework) and postgresql",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanengineer/microservices-nodejs-postgresql-order-services.git"
+  },
+  "keywords": [
+    "nodejs",
+    "postgres",
+    "fastify",
+    "microservices",
+    "docker"
+  ],
+  "author": "sanengineer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanengineer/microservices-nodejs-postgresql-order-services/issues"
+  },
+  "homepage": "https://github.com/sanengineer/microservices-nodejs-postgresql-order-services#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "fastify": "^3.14.1",
+    "fastify-auth": "^1.0.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "pino-pretty": "^4.7.1"
+  }
+}
