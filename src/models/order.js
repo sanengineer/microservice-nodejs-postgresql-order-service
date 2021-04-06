@@ -1,6 +1,20 @@
 "use strict";
+const { Model } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
+
+console.log(uuidv4());
 
 module.exports = (sequelize, Sequelize) => {
+  class order extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
   order.init(
     {
       id: {
@@ -65,5 +79,7 @@ module.exports = (sequelize, Sequelize) => {
       modelName: "order",
     }
   );
+
+  order.beforeCreate((order) => (order.id = uuidv4()));
   return order;
 };
