@@ -1,5 +1,5 @@
 const userController = require("../controllers/orderController");
-const userAuthentication = require("../middlewares/userAuthMiddleware");
+const { userAuthentication } = require("../middlewares/userAuthMiddleware");
 
 const api = async (app) => {
   app.route({
@@ -31,6 +31,20 @@ const api = async (app) => {
   });
 
   app.route({
+    method: "GET",
+    url: "/order/user/:user_id",
+    preHandler: userAuthentication,
+    handler: userController.getOrderByUserId,
+  });
+
+  app.route({
+    method: "GET",
+    url: "/order/user/:user_id/count",
+    preHandler: userAuthentication,
+    handler: userController.getCountOrderUserId,
+  });
+
+  app.route({
     method: "POST",
     url: "/order",
     preHandler: userAuthentication,
@@ -49,6 +63,13 @@ const api = async (app) => {
     url: "/order/:order_id",
     preHandler: userAuthentication,
     handler: userController.deleteOrder,
+  });
+
+  app.route({
+    method: "DELETE",
+    url: "/order",
+    preHandler: userAuthentication,
+    handler: userController.deleteAllOrder,
   });
 };
 

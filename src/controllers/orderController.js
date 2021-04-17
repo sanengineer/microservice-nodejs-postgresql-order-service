@@ -7,10 +7,22 @@ module.exports = {
     //debug
     req.log.info("read orders");
 
-    Order.findAll().then((data) => {
-      res.statusCode = 200;
-      res.send(data);
-    });
+    Order.findAll()
+      .then((data) => {
+        //
+        //debug
+        console.log("get all order:", data);
+
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch((error) => {
+        //
+        //debug
+        console.log("\nerror:", error.message, "\n");
+        res.statusCode = 500;
+        res.send();
+      });
   },
 
   getOneOrder: async function (req, res) {
@@ -62,6 +74,49 @@ module.exports = {
     res.send({ message: "query order route" });
   },
 
+  getOrderByUserId: async (req, res) => {
+    const user_id = req.params.user_id;
+
+    Order.findAll({ where: { user_id: user_id } })
+      .then((data) => {
+        //
+        //debug
+        console.log(data);
+
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch((e) => {
+        //
+        //debug
+        console.log(e);
+
+        res.statusCode = 500;
+        res.send(e);
+      });
+  },
+
+  getCountOrderUserId: async (req, res) => {
+    const user_id = req.params.user_id;
+    Order.count({ where: { user_id: user_id } })
+      .then((data) => {
+        //
+        //debug
+        console.log(data);
+
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch((e) => {
+        //
+        //debug
+        console.log(e);
+
+        res.statusCode = 500;
+        res.send(e);
+      });
+  },
+
   createOrder: async (req, res) => {
     //
     //debug
@@ -69,12 +124,20 @@ module.exports = {
 
     const new_order = req.body;
 
-    Order.create(new_order).then((data) => {
-      res.statusCode = 200;
-      res.send({
-        name: data.name,
+    Order.create(new_order)
+      .then((data) => {
+        res.statusCode = 200;
+        res.send({
+          name: data.name,
+        });
+      })
+      .catch((e) => {
+        //
+        //debug
+        console.log("\nerror message:", e, "\n");
+
+        res.send({ message: "user_id cannot be empty" });
       });
-    });
   },
 
   updateOrder: async (req, res) => {
@@ -113,11 +176,8 @@ module.exports = {
         //debug
         console.log("data:", data);
 
-        if (!data) {
-          return (
-            (res.statusCode = 204),
-            res.send({ order_id: id, message: "no content" })
-          );
+        if (data == 0) {
+          return (res.statusCode = 204), res.send();
         } else {
           return (
             (res.statusCode = 200),
@@ -128,6 +188,20 @@ module.exports = {
       .catch((err) => {
         res.statusCode = 500;
         res.send(err);
+      });
+  },
+
+  deleteAllOrder: async (req, res) => {
+    Order.destroy({ where: {}, truncate: true })
+      .then((data) => {
+        if (data == 0) {
+          res.statusCode = 204;
+          res.send();
+        }
+      })
+      .catch((e) => {
+        res.statusCode = 500;
+        res.send(e);
       });
   },
 };

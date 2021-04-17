@@ -1,5 +1,8 @@
 const http = require("http");
-const userAuthentication = (request, reply, done) => {
+
+const dataResponse = "";
+
+const userAuthentication = async (request, reply, done) => {
   if (!request.raw.headers.authorization) {
     return done(new Error("missing token"));
   }
@@ -50,6 +53,7 @@ const userAuthentication = (request, reply, done) => {
         //
         //debug
         console.log(JSON.parse(data));
+        reply.send(dataResponse);
         done();
       }
     });
@@ -75,4 +79,6 @@ const userAuthentication = (request, reply, done) => {
   //   done();
 };
 
-module.exports = userAuthentication;
+console.log("data Response:", dataResponse);
+
+module.exports = [userAuthentication, dataResponse];

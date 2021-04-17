@@ -21,7 +21,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
@@ -64,6 +64,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       shipping_track_id: {
         type: Sequelize.STRING,
+      },
+      user_id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
