@@ -81,4 +81,4 @@ const userAuthentication = async (request, reply, done) => {
 
 console.log("data Response:", dataResponse);
 
-module.exports = [userAuthentication, dataResponse];
+module.exports = userAuthentication;

@@ -1,5 +1,5 @@
 const userController = require("../controllers/orderController");
-const { userAuthentication } = require("../middlewares/userAuthMiddleware");
+const userAuthentication = require("../middlewares/userAuthMiddleware");
 
 const api = async (app) => {
   app.route({

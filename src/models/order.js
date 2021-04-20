@@ -1,8 +1,5 @@
 "use strict";
 const { Model } = require("sequelize");
-const { v4: uuidv4 } = require("uuid");
-
-console.log(uuidv4());
 
 module.exports = (sequelize, Sequelize) => {
   class order extends Model {
@@ -19,9 +16,9 @@ module.exports = (sequelize, Sequelize) => {
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
@@ -68,7 +65,7 @@ module.exports = (sequelize, Sequelize) => {
       user_id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUIDV4,
+        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,
