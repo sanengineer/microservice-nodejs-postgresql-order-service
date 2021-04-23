@@ -23,6 +23,9 @@ module.exports = (sequelize, Sequelize) => {
       payment_url: {
         type: Sequelize.TEXT,
       },
+      tax: {
+        type: Sequelize.FLOAT,
+      },
       diskon: {
         type: Sequelize.FLOAT,
       },

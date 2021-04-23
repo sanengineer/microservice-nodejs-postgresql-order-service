@@ -2,8 +2,17 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("orders", {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+      },
       payment_url: {
         type: Sequelize.TEXT,
+      },
+      tax: {
+        type: Sequelize.FLOAT,
       },
       diskon: {
         type: Sequelize.FLOAT,
