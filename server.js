@@ -8,8 +8,8 @@ const app = fastify({
   },
 });
 
-const PORT = process.env.PORT || 5000;
-const HOSTNAME = process.env.HOSTNAME || "localhost";
+const PORT = process.env.ORDER_PORT || 5000;
+const HOSTNAME = process.env.ORDER_HOSTNAME || "localhost";
 
 app.register(userRoute);
 app.listen(PORT, () => console.log(`server run on http://${HOSTNAME}:${PORT}`));
