@@ -100,6 +100,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
-  order.beforeCreate((order) => (order.id = uuidv4()));
   return order;
 };

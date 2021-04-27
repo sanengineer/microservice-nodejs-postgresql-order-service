@@ -13,8 +13,12 @@ module.exports = {
         //debug
         console.log("get all order:", data);
 
-        res.statusCode = 200;
-        res.send(data);
+        if (data != 0) {
+          res.statusCode = 200;
+          res.send(data);
+        } else {
+          res.statusCode = 204;
+        }
       })
       .catch((error) => {
         //
@@ -131,12 +135,12 @@ module.exports = {
           name: data.name,
         });
       })
-      .catch((e) => {
+      .catch((error) => {
         //
         //debug
-        console.log("\nerror message:", e, "\n");
+        console.log("\nerror message:", error, "\n");
 
-        res.send({ message: "user_id cannot be empty" });
+        res.send({ message: error.message });
       });
   },
 
