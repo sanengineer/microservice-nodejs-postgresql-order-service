@@ -5,13 +5,13 @@ module.exports = {
   getAllOrder: async function (req, res) {
     //
     //debug
-    req.log.info("read orders");
+    // req.log.info("read orders");
 
     Order.findAll()
       .then((data) => {
         //
         //debug
-        console.log("get all order:", data);
+        // console.log("get all order:", data);
 
         if (data != 0) {
           res.statusCode = 200;
@@ -32,8 +32,8 @@ module.exports = {
   getOneOrder: async function (req, res) {
     //
     //debug
-    console.log("\nreq params:", req.params, "\n");
-    req.log.info("read order");
+    // console.log("\nreq params:", req.params, "\n");
+    // req.log.info("read order");
 
     const id = req.params.order_id;
 
@@ -55,8 +55,7 @@ module.exports = {
   countAllOrder: async (req, res) => {
     //
     //debug
-
-    req.log.info("query order");
+    // req.log.info("query order");
 
     Order.count()
       .then((data) => {
@@ -72,8 +71,8 @@ module.exports = {
   findOneOrder: async (req, res) => {
     //
     //debug
-    console.log("\n req params:", req.query);
-    req.log.info("query order");
+    // console.log("\n req params:", req.query);
+    // req.log.info("query order");
 
     res.send({ message: "query order route" });
   },
@@ -124,7 +123,7 @@ module.exports = {
   createOrder: async (req, res) => {
     //
     //debug
-    req.log.info("create order");
+    // req.log.info("create order");
 
     const new_order = req.body;
 
@@ -147,7 +146,7 @@ module.exports = {
   updateOrder: async (req, res) => {
     //
     //debug
-    req.log.info("update order");
+    // req.log.info("update order");
 
     const id = req.params.order_id;
 
@@ -170,7 +169,7 @@ module.exports = {
   deleteOrder: async (req, res) => {
     //
     //debug
-    req.log.info("delete order");
+    // req.log.info("delete order");
 
     const id = req.params.order_id;
 

@@ -3,9 +3,9 @@ const fastify = require("fastify");
 const userRoute = require("./src/routes/orderRoute");
 
 const app = fastify({
-  logger: {
-    prettyPrint: true,
-  },
+  // logger: {
+  //   prettyPrint: true,
+  // },
 });
 
 const PORT = process.env.ORDER_PORT || 5000;
