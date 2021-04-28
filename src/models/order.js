@@ -55,7 +55,7 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
       },
       user_id: {
-        unique: true,
+        // unique: true,
         type: Sequelize.UUID,
       },
       order_geo_loc: {

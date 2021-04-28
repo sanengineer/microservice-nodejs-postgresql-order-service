@@ -1,6 +1,6 @@
 const http = require("http");
 
-const dataResponse = "";
+const dataResponse = "horray";
 
 const userAuthentication = async (request, reply, done) => {
   if (!request.raw.headers.authorization) {
@@ -45,40 +45,39 @@ const userAuthentication = async (request, reply, done) => {
       if (res.statusCode == 401) {
         //
         //debug
-        console.log(JSON.parse(data));
+        // console.log(JSON.parse(data));
 
         reply.statusCode = res.statusCode;
         reply.send(JSON.parse(data));
       } else if (res.statusCode == 200) {
         //
         //debug
-        console.log(JSON.parse(data));
-        reply.send(dataResponse);
+        // console.log(JSON.parse(data));
+        // reply.send(dataResponse);
         done();
       }
     });
   });
 
   req.write(postData);
-  //   req.end();
+  // req.end();
 
   req.on("error", (error) => {
     console.log("request error:", error);
   });
 
   request.log.info("test request middleware it's ok");
-
   //debug
   //   console.log("\n");
   //   console.log("bearer token:", "\n", bearerToken, "\n");
   //   console.log("request raw:", "\n", request.raw.headers, "\n");
-  //   console.log("reply raw:", "\n", reply.raw);
+  // console.log("reply raw:", "\n", reply.raw);
   //   console.log("data body:", "\n", data);
   //   console.log("request nodejs:", "\n", userAuth());
   //   console.log("auth user services:", "\n", options);
   //   done();
 };
 
-console.log("data Response:", dataResponse);
+// console.log("data Response:", dataResponse);
 
 module.exports = userAuthentication;
