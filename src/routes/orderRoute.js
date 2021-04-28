@@ -1,13 +1,13 @@
 const userController = require("../controllers/orderController");
 const middleware = require("../middlewares/userAuthMiddleware");
-const userAuthentication = middleware.userAuthentication;
-const userAuthenticationWithAxios = middleware.userAuthenticationWithAxios;
+// const userAuthentication = middleware.userAuthentication;
+const userAuthentication = middleware.userAuthenticationWithAxios;
 
 const api = async (app) => {
   app.route({
     method: "GET",
     url: "/order",
-    preHandler: userAuthenticationWithAxios,
+    preHandler: userAuthentication,
     handler: userController.getAllOrder,
   });
 

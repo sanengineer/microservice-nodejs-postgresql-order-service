@@ -23,6 +23,10 @@ module.exports = (sequelize, Sequelize) => {
       payment_url: {
         type: Sequelize.TEXT,
       },
+      status: {
+        type: Sequelize.ENUM("pending", "process", "done", "canceled"),
+        defaultValue: "pending",
+      },
       tax: {
         type: Sequelize.FLOAT,
       },
@@ -49,6 +53,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       collect_self: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       cart_id: {
         type: Sequelize.UUID,

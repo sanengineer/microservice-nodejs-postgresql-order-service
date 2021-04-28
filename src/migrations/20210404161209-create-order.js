@@ -8,6 +8,10 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
+      status: {
+        type: Sequelize.ENUM("pending", "process", "done", "canceled"),
+        defaultValue: "pending",
+      },
       payment_url: {
         type: Sequelize.TEXT,
       },
@@ -37,6 +41,7 @@ module.exports = {
       },
       collect_self: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       cart_id: {
         type: Sequelize.UUID,
